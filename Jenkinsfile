@@ -67,7 +67,7 @@ pipeline {
                         openshift.withProject(params.namespace) {
                             openshift.apply(readFile("src/main/openshift/deployment.yaml"))
                             openshift.apply(readFile("src/main/openshift/service.yaml"))
-                    /*        openshift.apply(readFile("src/main/openshift/route.yaml")) */
+                            openshift.apply(readFile("src/main/openshift/route.yaml"))
                             openshift.apply(readFile("src/main/openshift/role.yaml"))
                             openshift.apply(readFile("src/main/openshift/rolebinding.yaml"))
                             openshift.apply(readFile("src/main/openshift/serviceaccount.yaml"))

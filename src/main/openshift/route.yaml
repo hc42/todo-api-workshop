@@ -1,0 +1,17 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: todo-api-quarkus
+  namespace: hch-api-project
+spec:
+  host: todo-api-quarkus-hch-api-project.apps.avm.cc-openshift.de
+  to:
+    kind: Service
+    name: todo-api-service
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

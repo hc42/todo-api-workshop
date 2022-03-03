@@ -1,0 +1,32 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: todo-api-deployment
+  namespace: hch-api-project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-api-quarkus
+  template:
+    metadata:
+      labels:
+        app: todo-api-quarkus
+    spec:
+      containers:
+        - name: todo-api-quarkus
+          image: 'dummy-to-be-overwritten-by-Jenkins-pipeline'
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      serviceAccountName: todo-api-quarkus
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
